@@ -1,10 +1,18 @@
+import { ContentLayoutComponent } from './layout/content/content.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+export const AppRoutes: Routes = [
+  {
+    path: '',
+    component: ContentLayoutComponent,
+    children: [{
+      path: '',
+      loadChildren: './pages/web/web.module#WebModule'
+    }]
+  },
+  {
+    path: '**',
+    redirectTo: '/'
+  }
+]

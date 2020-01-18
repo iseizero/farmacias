@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-content-layout',
-  templateUrl: './content.component.html'
+    selector: 'app-content-layout',
+    templateUrl: './content.component.html'
 })
-export class ContentLayoutComponent{
+export class ContentLayoutComponent {
 }
