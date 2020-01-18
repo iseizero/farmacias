@@ -1,17 +1,28 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <select name="" id="">Elegir Comuna</select>
-        </div>
-        <div class="col-md-12">
-            <input type="text" class="form-control">
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Buscador de farmacias en RM</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="select-comuna">
+      <div class="col-md-12" style="margin-bottom: 15px">
+        <select name="" id="" [(ngModel)]="comunaSeleccionada" class="form-control">
+          <option value="0" selected disabled>Elija una comuna</option>
+          <option value="{{item}}" *ngFor="let item of comunas">{{item}}</option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <input type="text" (keydown)="onKeydown($event)" [(ngModel)]="farmaciaBuscar" class="form-control" placeholder="Buscar por nombre">
+      </div>
     </div>
 
-    <!-- Mapa -->
-    <div class="row">
-        <div class="col-md 12">
-            
-        </div>
+  </div>
+
+  <!-- Mapa -->
+  <div class="row">
+    <div class="col-md 12" class="mapa-farmacias">
+
     </div>
+  </div>
 </div>
