@@ -63,33 +63,41 @@ export class HomeComponent implements OnInit {
 
 
     async setMapPoints(array) {
-        
+
         // this.map.on('load', () => {
-            
+
         // })
 
-        this.map.addSource('pointSource', {
-            type: 'geojson',
-            data: {
-                type: 'FeatureCollection',
-                features: array
-            }
-        });
 
-        this.map.addLayer({
-            id: 'map',
-            source: 'pointSource',
-            type: 'circle'
-        });
+        setTimeout(() => {
+            console.log(array);
+
+            this.map.on('click', () => {
+                this.map.addSource('pointSource', {
+                    type: 'geojson',
+                    data: {
+                        type: 'FeatureCollection',
+                        features: array
+                    }
+                });
+
+                this.map.addLayer({
+                    id: 'map',
+                    source: 'pointSource',
+                    type: 'circle'
+                });
+            })
+        }, 3000)
+
     }
 
 
     formatArrayPoints(data) {
-        let auxPoints : any[] = [];
+        let auxPoints: any[] = [];
         let bodyData: any = {
             type: 'Feature',
-            geometry:{
-                type:'Point',
+            geometry: {
+                type: 'Point',
                 coordinates: []
             }
         };
