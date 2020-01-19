@@ -8,7 +8,7 @@ export class FarmaciaServiceClient {
     constructor(private http: HttpClient){ }
 
     obtenerComunasSantiago(){
-        return this.http.get('http://localhost:8080/v1/api/farmacias/obtenerComunas').toPromise()
+        return this.http.get('https://app-farmacia-api.herokuapp.com/v1/api/farmacias/obtenerComunas').toPromise()
     }
 
     /**
@@ -24,6 +24,6 @@ export class FarmaciaServiceClient {
         }
 
         debugger;
-        return this.http.post(`http://localhost:8080/v1/api/farmacias/obtenerFarmacias`, body).toPromise();
+        return this.http.post(`https://app-farmacia-api.herokuapp.com/v1/api/farmacias/obtenerFarmacias`, body).toPromise();
     }
 }
