@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +22,9 @@
     "@angular/router": "~7.2.0",
     "@types/mapbox-gl": "^1.6.3",
     "core-js": "^2.5.4",
+    "express": "^4.17.1",
     "mapbox-gl": "^1.6.1",
+    "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
