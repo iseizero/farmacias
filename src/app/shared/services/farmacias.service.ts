@@ -23,7 +23,6 @@ export class FarmaciaServiceClient {
             nombre_de_local: nombre.toUpperCase()
         }
 
-        debugger;
         return this.http.post(`https://app-farmacia-api.herokuapp.com/v1/api/farmacias/obtenerFarmacias`, body).toPromise();
     }
 }

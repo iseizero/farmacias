@@ -33,27 +33,22 @@ export class HomeComponent implements OnInit {
         this.map = new mapboxgl.Map({
             container: 'map',
             style: this.style,
-            zoom: 10,
+            zoom: 9,
             center: [this.lng, this.lat],
         });
 
+
         this.map.addControl(new mapboxgl.NavigationControl());
-        
+
     }
 
     async obtenerComunas() {
         return this.farmaciaService.obtenerComunasSantiago();
     }
 
-    async eliminarPrimerDatoArray(array) {
-
-
-        return array;
-    }
-
     async buscarFarmacia(comuna, nombre) {
         this.farmaciaService.obtenerFarmaciasPorComunaYNombrew(comuna, nombre).then((farmacias) => {
-            console.log(farmacias);
+            this.formatArrayPoints(farmacias);
         }).catch((err) => {
             console.log('Error al realizar la consulta', err);
         })
@@ -66,5 +61,46 @@ export class HomeComponent implements OnInit {
         }
     }
 
+
+    async setMapPoints(array) {
+        
+        // this.map.on('load', () => {
+            
+        // })
+
+        this.map.addSource('pointSource', {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: array
+            }
+        });
+
+        this.map.addLayer({
+            id: 'map',
+            source: 'pointSource',
+            type: 'circle'
+        });
+    }
+
+
+    formatArrayPoints(data) {
+        let auxPoints : any[] = [];
+        let bodyData: any = {
+            type: 'Feature',
+            geometry:{
+                type:'Point',
+                coordinates: []
+            }
+        };
+
+        data.forEach((item: any) => {
+            bodyData.geometry.coordinates.lat = parseFloat(item.local_lat);
+            bodyData.geometry.coordinates.lng = parseFloat(item.local_lng);
+            auxPoints.push(bodyData);
+        });
+
+        this.setMapPoints(auxPoints);
+    }
 
 }
