@@ -1,4 +1,3 @@
-import { environment } from './../../../../environments/environment';
 import { FarmaciaServiceClient } from './../../../shared/services/farmacias.service';
 import { Component, OnInit } from "@angular/core";
 import * as mapboxgl from 'mapbox-gl';
@@ -11,6 +10,10 @@ import * as mapboxgl from 'mapbox-gl';
 export class HomeComponent implements OnInit {
 
 
+    geoJson: any;
+
+    type: String = "Point";
+
     map: mapboxgl.Map;
     style = 'mapbox://styles/mapbox/streets-v11';
     lat = -33.4726900;
@@ -22,7 +25,7 @@ export class HomeComponent implements OnInit {
     constructor(private farmaciaService: FarmaciaServiceClient) { }
 
     async ngOnInit() {
-        
+
         this.comunas = await this.obtenerComunas();
 
         Object.getOwnPropertyDescriptor(mapboxgl, "accessToken").set('pk.eyJ1IjoiaXNlaXplcm8iLCJhIjoiY2s1azl4aXkxMGJ4NTNubzd4Y2piNncwNSJ9.78n5xewCetGIdlxbbiUs7Q');
@@ -31,10 +34,11 @@ export class HomeComponent implements OnInit {
             container: 'map',
             style: this.style,
             zoom: 10,
-            center: [this.lng, this.lat]
+            center: [this.lng, this.lat],
         });
 
         this.map.addControl(new mapboxgl.NavigationControl());
+        
     }
 
     async obtenerComunas() {
@@ -61,4 +65,6 @@ export class HomeComponent implements OnInit {
             this.buscarFarmacia(this.comunaSeleccionada, this.farmaciaBuscar);
         }
     }
+
+
 }
