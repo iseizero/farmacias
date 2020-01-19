@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
         this.map = new mapboxgl.Map({
             container: 'map',
             style: this.style,
-            zoom: 13,
+            zoom: 10,
             center: [this.lng, this.lat]
         });
 
