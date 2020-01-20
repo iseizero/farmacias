@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
             this.formatArrayPoints(farmacias);
         }).catch((err) => {
             console.log('Error al realizar la consulta', err);
-        })
+        });
     }
 
     onKeydown(event) {
@@ -64,49 +64,32 @@ export class HomeComponent implements OnInit {
 
     async setMapPoints(array) {
 
-        // this.map.on('load', () => {
+        console.log(array);
+        array.forEach(element => {
+            var marker = new mapboxgl.Marker();
+            marker.setLngLat([element.lng, element.lat]).addTo(this.map);
+        });
 
-        // })
-
-
-        setTimeout(() => {
-            console.log(array);
-
-            this.map.on('click', () => {
-                this.map.addSource('pointSource', {
-                    type: 'geojson',
-                    data: {
-                        type: 'FeatureCollection',
-                        features: array
-                    }
-                });
-
-                this.map.addLayer({
-                    id: 'map',
-                    source: 'pointSource',
-                    type: 'circle'
-                });
-            })
-        }, 3000)
-
+        
     }
 
 
     formatArrayPoints(data) {
         let auxPoints: any[] = [];
-        let bodyData: any = {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: []
-            }
-        };
+        
+        
 
         data.forEach((item: any) => {
-            bodyData.geometry.coordinates.lat = parseFloat(item.local_lat);
-            bodyData.geometry.coordinates.lng = parseFloat(item.local_lng);
+            let bodyData: any = {
+                lat: null,
+                lng: null
+            };
+            bodyData.lat = parseFloat(item.local_lat);
+            bodyData.lng = parseFloat(item.local_lng);
             auxPoints.push(bodyData);
         });
+
+        console.log(auxPoints)
 
         this.setMapPoints(auxPoints);
     }
